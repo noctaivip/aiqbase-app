@@ -1,0 +1,44 @@
+{
+  "name": "IQ Factory AI",
+  "short_name": "IQ Factory",
+  "description": "Персональный тренер мышления и полезных знаний для реальной жизни.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#050A16",
+  "theme_color": "#07111E",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "id": "./index.html",
+  "categories": [
+    "education",
+    "productivity"
+  ],
+  "shortcuts": [
+    {
+      "name": "Начать тренировку",
+      "short_name": "Тренировка",
+      "url": "./index.html#train",
+      "description": "Открыть ежедневную тренировку"
+    },
+    {
+      "name": "База знаний",
+      "short_name": "База",
+      "url": "./index.html#library",
+      "description": "Открыть базу знаний"
+    }
+  ]
+}
