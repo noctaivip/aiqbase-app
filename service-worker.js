@@ -1,4 +1,4 @@
-const CACHE_NAME = 'aiqbase-knowledge-1423-v7-single-next';
+const CACHE_NAME = 'aiqbase-knowledge-1423-v8-compact-actions';
 const APP_SHELL = [
   './',
   './index.html',
