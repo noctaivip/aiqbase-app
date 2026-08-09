@@ -1,4 +1,4 @@
-const CACHE_NAME = 'aiqbase-person-types-500-v3';
+const CACHE_NAME = 'aiqbase-knowledge-1423-v6';
 const APP_SHELL = [
   './',
   './index.html',
@@ -48,6 +48,19 @@ self.addEventListener('fetch', (event) => {
 
   if (url.origin !== self.location.origin) {
     event.respondWith(fetch(request).catch(() => caches.match(request, { ignoreSearch: true })));
+    return;
+  }
+
+  if (url.pathname.includes('/content/') && url.pathname.endsWith('.json')) {
+    event.respondWith(
+      fetch(request).then((response) => {
+        if (response && response.ok) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy)).catch(() => {});
+        }
+        return response;
+      }).catch(() => caches.match(request, { ignoreSearch: true }))
+    );
     return;
   }
 
