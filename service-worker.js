@@ -1,11 +1,11 @@
-const CACHE_NAME = 'aiqbase-vocab-500-v1';
+const CACHE_NAME = 'aiqbase-vocab-500-v2';
 const APP_SHELL = [
   './',
   './index.html',
   './app_preview.html',
   './manifest.webmanifest',
   './content/questions.json',
-  './content/vocabulary.json',
+  './content/person-types.json',
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];
