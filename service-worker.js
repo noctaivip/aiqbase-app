@@ -1,4 +1,4 @@
-const CACHE_NAME = 'aiqbase-knowledge-1423-v8-compact-actions';
+const CACHE_NAME = 'aiqbase-knowledge-1423-v9-sheet-close';
 const APP_SHELL = [
   './',
   './index.html',
