@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0",
+  "product": "AIQBase",
+  "language": "ru",
+  "questionCount": 2500,
+  "academicFields": [
+    "difficulty",
+    "topic",
+    "subtopic",
+    "learningObjective",
+    "contentVersion",
+    "verificationStatus",
+    "sourceType",
+    "sourceCitation",
+    "reviewedBy",
+    "reviewedAt"
+  ],
+  "verificationPolicy": {
+    "pending_review": "Редакционная запись структурирована, но ещё не подтверждена внешним академическим источником/рецензентом.",
+    "verified": "Допускается только после заполнения sourceCitation, reviewedBy и reviewedAt."
+  },
+  "counts": {
+    "pending_review": 2500,
+    "verified": 0
+  },
+  "modes": {
+    "practical": 500,
+    "thinking": 500,
+    "erudition": 500,
+    "vocabulary": 500,
+    "person_type": 500
+  }
+}

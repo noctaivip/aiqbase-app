@@ -1,4 +1,4 @@
-const CACHE_NAME = 'aiqbase-institution-foundation-v1';
+const CACHE_NAME = 'aiqbase-institution-academic-content-v2';
 const APP_SHELL = [
   './',
   './index.html',
@@ -7,6 +7,7 @@ const APP_SHELL = [
   './content/questions.json',
   './content/vocabulary.json',
   './content/person-types.json',
+  './content/content-manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];
