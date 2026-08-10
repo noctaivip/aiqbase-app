@@ -2058,6 +2058,15 @@ input,textarea,select{
 }
 #nextBtn:active{transform:translateY(1px) scale(.995) !important;}
 #stickyNextBtn,.next-inline{display:none !important;}
+
+/* === Learning Path v1: mastery, review and parent history === */
+.learn-btn{margin-left:auto;flex:0 0 auto;min-width:96px;max-width:118px;min-height:38px;padding:7px 12px;border-radius:13px;border:1px solid rgba(61,214,255,.34);background:linear-gradient(180deg,rgba(61,214,255,.13),rgba(61,214,255,.06));color:#eefbff;font-weight:850;font-size:12px;line-height:1.12;letter-spacing:.01em;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.learn-btn:active{transform:translateY(1px)}
+.learn-btn.is-progress{border-color:rgba(122,85,255,.46);background:linear-gradient(180deg,rgba(122,85,255,.17),rgba(61,214,255,.07))}
+.learning-mode-strip{display:none;margin:-2px 0 12px;padding:10px 12px;border:1px solid rgba(61,214,255,.28);border-radius:14px;background:linear-gradient(135deg,rgba(61,214,255,.08),rgba(122,85,255,.08));align-items:center;gap:10px}
+.learning-mode-strip.show{display:flex}.learning-mode-strip .dot{width:9px;height:9px;border-radius:50%;background:#40e88c;box-shadow:0 0 12px rgba(64,232,140,.5);flex:0 0 auto}.learning-mode-strip b{display:block;font-size:12px;color:#fff}.learning-mode-strip span{display:block;font-size:11px;color:#9fb0cc;margin-top:2px}
+.learning-dashboard{margin-top:14px}.learning-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}.learning-stat{padding:13px;border:1px solid rgba(145,171,214,.25);border-radius:16px;background:rgba(10,25,45,.55)}.learning-stat b{display:block;font-size:22px;color:#fff}.learning-stat span{font-size:11px;color:#9fb0cc}.learning-row{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:10px}.learning-progress{height:9px;border-radius:99px;background:#091426;overflow:hidden;margin-top:10px}.learning-progress i{display:block;height:100%;background:linear-gradient(90deg,#2cc8ef,#7a55ff);border-radius:inherit}.history-actions{display:flex;gap:8px;margin-top:9px}.history-actions button{flex:1;min-width:0;padding:8px 9px;border-radius:11px;font-size:11px}.review-due{color:#f6c76b!important}.learn-active{outline:1px solid rgba(61,214,255,.55);box-shadow:0 0 0 3px rgba(61,214,255,.06)}
+
 </style>
 </head><body>
 <div class="app">
@@ -2087,11 +2096,11 @@ input,textarea,select{
    <div class="track" onclick="setMode('practical')"><div class="ico">🟢</div><div><h4>Практический IQ</h4><p>Безопасность, деньги, здоровье, интернет.</p></div></div>
    <div class="track" onclick="setMode('thinking')"><div class="ico">🧠</div><div><h4>Логика и мышление</h4><p>Ошибки мышления, анализ, решения.</p></div></div>
    <div class="track" onclick="setMode('erudition')"><div class="ico">🌍</div><div><h4>Полезная эрудиция</h4><p>Мир, культура, наука без лишней зубрёжки.</p></div></div>
-   <div class="track" onclick="setMode('vocabulary')"><div class="ico">🗣️</div><div><h4>Словарный интеллект</h4><p>500 важных слов и понятий: значение, смысл и точное употребление.</p></div></div>
-   <div class="track" onclick="setMode('person_type')"><div class="ico">👤</div><div><h4>Как называется такой человек?</h4><p>500 точных названий людей по характеру, поведению и поступкам.</p></div></div>
+   <div class="track" onclick="setMode('vocabulary')"><div class="ico">📚</div><div><h4>Словарный интеллект</h4><p>500 важных слов и понятий: значение, смысл и точное употребление.</p></div></div>
+   <div class="track" onclick="setMode('person_type')"><div class="ico">🎭</div><div><h4>Как называется такой человек?</h4><p>500 точных названий людей по характеру, поведению и поступкам.</p></div></div>
   </section>
   <section id="train" class="view">
-   <div class="top"><div><div class="kicker">Тренировка</div><h1 style="margin:4px 0 0;font-size:25px;letter-spacing:-.05em">Раунд знаний</h1></div><span class="pill" id="modeName">Смешанный</span></div>
+   <div class="top"><div><div class="kicker">Тренировка</div><h1 style="margin:4px 0 0;font-size:25px;letter-spacing:-.05em">Раунд знаний</h1></div><span class="pill" id="modeName">Смешанный</span></div><div id="learningModeStrip" class="learning-mode-strip"><i class="dot"></i><div><b id="learningModeTitle">Режим обучения</b><span id="learningModeMeta">Прогресс сохраняется на этом устройстве</span></div></div>
    <div class="card" style="margin-bottom:12px"><div class="row"><span class="mini" id="roundInfo">0 из 5</span><span class="mini" id="dailyStatus">цель дня</span></div><div class="progressbar" style="margin-top:10px"><i id="roundBar"></i></div></div>
    <div id="goalComplete" class="completion"><h3>Цель дня выполнена</h3><p class="muted">Вы получили сегодняшнюю порцию полезных знаний. Можно продолжить или вернуться завтра.</p><button class="btn gold block" onclick="shareProgress()">Поделиться итогом</button></div><div class="question-card"><div class="meta"><span class="tag green" id="qTag">Полезное знание</span><span class="tag blue" id="qCat">Категория</span></div><h2 class="qtext" id="qText">Загрузка вопроса...</h2><div id="options"></div><div id="result" class="result"></div><button id="nextBtn" class="btn primary block" style="margin-top:14px;display:none" onclick="nextQuestion()">Продолжить →</button></div>
   </section>
@@ -2155,7 +2164,7 @@ input,textarea,select{
    </div>
 
    <div class="section"><h3>Достижения</h3></div><div id="badges"></div>
-   <div class="section"><h3>Последние ответы</h3></div><div id="historyList" class="list"></div>
+   <div id="learningDashboard"></div><div class="section"><h3>Последние ответы</h3></div><div id="historyList" class="list"></div>
   </section>
   <section id="profile" class="view">
    <div class="top"><div><div class="kicker">Профиль</div><h1 style="margin:4px 0 0;font-size:25px;letter-spacing:-.05em">Мой путь</h1></div></div>
@@ -2505,6 +2514,108 @@ async function loadQuestionsFixed(){
   nextQuestion(false);
   updateStats();
 }
-hydrate();loadQuestionsFixed();
+
+/* === Learning Path v1 === */
+let learningMode=false, learningScope='all', learningSessionId=null;
+const learningStorageKey='aiqbase_learning_progress_v1';
+function learningInit(){
+ state.learning=state.learning&&typeof state.learning==='object'?state.learning:{};
+ state.learning.sessions=Array.isArray(state.learning.sessions)?state.learning.sessions:[];
+ state.learning.active=state.learning.active&&typeof state.learning.active==='object'?state.learning.active:null;
+}
+function loadLearningPersistent(){try{const raw=localStorage.getItem(learningStorageKey);if(raw){const saved=JSON.parse(raw);if(saved&&typeof saved==='object'){state.learning={...state.learning,...saved};state.learning.sessions=Array.isArray(saved.sessions)?saved.sessions:(state.learning.sessions||[]);state.learning.active=saved.active&&typeof saved.active==='object'?saved.active:null;}}}catch(e){console.warn('Learning progress load failed',e)}learningInit()}
+function saveLearningPersistent(){try{localStorage.setItem(learningStorageKey,JSON.stringify(state.learning||{}))}catch(e){console.warn('Learning progress save failed',e)}save()}
+function learningRec(id){learningInit();return state.learning[id]||(state.learning[id]={seen:0,correct:0,wrong:0,status:'new',nextReview:0,last:0});}
+function scopeQuestions(scope){return scope==='all'?questions:questions.filter(q=>q.mode===scope)}
+function learningLabel(scope){return scope==='all'?'Вся база':scope==='practical'?'Практический IQ':scope==='thinking'?'Логика и мышление':scope==='erudition'?'Полезная эрудиция':scope==='vocabulary'?'Словарный интеллект':scope==='person_type'?'Как называется такой человек?':'Раздел'}
+function learningActionText(scope){const x=learningStats(scope);return x.mastered||x.review||x.fresh<x.total?'Продолжить':'Начать'}
+function updateLearningModeStrip(){const el=document.getElementById('learningModeStrip');if(!el)return;if(!learningMode){el.classList.remove('show');return}const x=learningStats(learningScope);el.classList.add('show');const t=document.getElementById('learningModeTitle'),m=document.getElementById('learningModeMeta');if(t)t.textContent='Обучение · '+learningLabel(learningScope);if(m)m.textContent=`Изучено ${x.mastered} из ${x.total} · ${x.review} на повторении`;}
+function updateLearningButtons(){document.querySelectorAll('.track[onclick*="setMode"]').forEach(el=>{const m=(el.getAttribute('onclick').match(/setMode\('([^']+)'\)/)||[])[1];const b=el.querySelector('.learn-btn');if(!m||!b)return;const x=learningStats(m);b.textContent=(x.mastered||x.review||x.fresh<x.total)?'Продолжить':'Начать';b.classList.toggle('is-progress',b.textContent==='Продолжить');b.setAttribute('aria-label',(b.textContent==='Начать'?'Начать обучение: ':'Продолжить обучение: ')+learningLabel(m));});}
+function startFullLearning(scope){
+ learningInit();learningMode=true;learningScope=scope||'all';selectedMode=learningScope==='all'?'mixed':learningScope;reviewMode=false;
+ learningSessionId='ls_'+Date.now();state.learning.active={id:learningSessionId,scope:learningScope,started:Date.now(),answered:0,correct:0,wrong:0,items:[]};saveLearningPersistent();
+ updateLearningModeStrip();updateLearningButtons();toast('Режим обучения включён · '+learningLabel(learningScope));nextQuestion(true);
+}
+function stopFullLearning(){learningMode=false;learningScope='all';state.learning.active=null;saveLearningPersistent();updateLearningModeStrip();updateLearningButtons();toast('Режим обучения завершён');}
+function learningPool(){
+ const now=Date.now(), arr=scopeQuestions(learningScope);
+ const due=arr.filter(q=>{const r=learningRec(q.id);return r.status==='review'&&Number(r.nextReview||0)<=now});
+ if(due.length)return due;
+ const fresh=arr.filter(q=>learningRec(q.id).status==='new');
+ if(fresh.length)return fresh;
+ return [];
+}
+function nextReviewInfo(scope){const now=Date.now();const future=scopeQuestions(scope).map(q=>learningRec(q.id)).filter(r=>r.status==='review'&&Number(r.nextReview||0)>now).sort((a,b)=>a.nextReview-b.nextReview);return future[0]||null}
+function shuffleQuestion(q){
+ const clone={...q,options:[...q.options]};const correct=clone.options[clone.answer];
+ for(let i=clone.options.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[clone.options[i],clone.options[j]]=[clone.options[j],clone.options[i]]}
+ clone.answer=clone.options.indexOf(correct);clone.__shuffled=true;return clone;
+}
+function nextQuestion(show=true){
+ if(!questions.length)return;
+ let arr=learningMode?learningPool():pool();
+ if(!arr.length){
+   if(learningMode){const stats=learningStats(learningScope);const future=nextReviewInfo(learningScope);if(stats.mastered>=stats.total&&stats.total>0){toast('Раздел полностью изучен')}else if(future){const d=new Date(future.nextReview);toast('Новые вопросы пройдены. Следующее повторение: '+d.toLocaleDateString('ru-RU'))}else{toast('На сегодня вопросов для изучения нет')}learningMode=false;state.learning.active=null;saveLearningPersistent();updateLearningModeStrip();updateLearningButtons();renderLearningDashboard();if(show)showView('progress');return}
+   toast(selectedMode==='person_type'?'Раздел «Как называется такой человек?» не загрузился. Обновите приложение.':'В этом разделе пока нет вопросов.');return;
+ }
+ let base=arr[Math.floor(Math.random()*arr.length)];current=shuffleQuestion(base);
+ state.recent=[current.id,...state.recent.filter(x=>x!==current.id)].slice(0,24);save();renderQuestion();if(show)showView('train');
+}
+function openQuestion(id){const q=questions.find(x=>x.id===id);if(q){current=shuffleQuestion(q);renderQuestion();showView('train')}}
+function scheduleLearning(q,ok){
+ if(!learningMode)return;
+ learningInit();const r=learningRec(q.id),now=Date.now();r.seen++;r.last=now;
+ if(ok){
+   r.correct++;
+   if(r.status==='review'){
+     const wrongAt=Number(r.wrongAt||now);const stage=Number(r.reviewStage||0);
+     if(stage===0){r.reviewStage=1;r.status='review';r.nextReview=Math.max(now+60000,wrongAt+3*86400000)}
+     else if(stage===1){r.reviewStage=2;r.status='review';r.nextReview=Math.max(now+60000,wrongAt+7*86400000)}
+     else{r.status='mastered';r.nextReview=0;r.reviewStage=0;r.wrongAt=0}
+   }else{r.status='mastered';r.nextReview=0;r.reviewStage=0}
+ }else{
+   r.wrong++;r.status='review';r.reviewStage=0;r.wrongAt=now;r.nextReview=now+86400000;
+ }
+ if(state.learning.active){state.learning.active.answered++;state.learning.active[ok?'correct':'wrong']++;}
+ saveLearningPersistent();
+}
+function finishLearningSessionIfNeeded(){
+ learningInit();const a=state.learning.active;if(!a)return;
+ if(a.answered>0 && (a.answered%10===0)){
+   state.learning.sessions.unshift({...a,items:Array.isArray(a.items)?a.items.slice(-10):[],ended:Date.now()});state.learning.sessions=state.learning.sessions.slice(0,120);
+   state.learning.active={id:'ls_'+Date.now(),scope:a.scope,started:Date.now(),answered:0,correct:0,wrong:0,items:[]};learningSessionId=state.learning.active.id;saveLearningPersistent();
+ }
+}
+function answer(i){
+ if(!current||document.getElementById('result').classList.contains('show'))return;const ok=i===current.answer;
+ document.querySelectorAll('.option').forEach((o,idx)=>{if(idx===current.answer)o.classList.add('good');else if(idx===i)o.classList.add('bad');o.disabled=true});
+ state.answered++;state.today=Math.min(state.goal,state.today+1);state.daily[todayKey()]=(state.daily[todayKey()]||0)+1;if(ok){state.correct++;state.xp+=12}else{state.xp+=4;state.mistakes[current.category]=(state.mistakes[current.category]||0)+1}state.level=Math.max(1,Math.floor(state.xp/100)+1);
+ scheduleLearning(current,ok);
+ const histItem={id:current.id,q:current.question,ok,cat:current.category,mode:current.mode,chosen:current.options[i],correctAnswer:current.options[current.answer],t:new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}),d:todayKey(),ts:Date.now()};state.history.unshift(histItem);state.history=state.history.slice(0,500);if(learningMode&&state.learning.active){state.learning.active.items=Array.isArray(state.learning.active.items)?state.learning.active.items:[];state.learning.active.items.push({...histItem})}state.mastery[current.id]=(state.mastery[current.id]||0)+(ok?2:1);finishLearningSessionIfNeeded();saveLearningPersistent();updateStats();
+ if(navigator.vibrate)navigator.vibrate(ok?25:[18,25,18]);const r=document.getElementById('result');r.innerHTML=`<h3>${ok?'Верно':'Правильный ответ: '+escapeHtml(current.options[current.answer])}</h3><p><b>Объяснение:</b> ${escapeHtml(current.explanation||'')}</p><p><b>Факт:</b> ${escapeHtml(current.fact||'')}</p><p><b>Где пригодится:</b> ${escapeHtml(current.whereUseful||'В повседневных решениях.')}</p><div class="ai-coach-result"><h4>🤖 AI Coach</h4><p><b>Навык:</b> ${escapeHtml(aiSkill(current))}</p><p><b>Вывод:</b> ${escapeHtml(aiTakeaway(current))}</p><p><b>Дальше:</b> ${escapeHtml(ok?'Правильный ответ сохранён в прогрессе.': 'Этот вопрос вернётся на повторение.')}</p></div><div class="cta result-actions" style="margin-top:12px"><button class="btn ghost block" onclick="toggleFav('${current.id}')">${state.favorites.includes(current.id)?'Убрать из избранного':'В избранное'}</button><button class="btn ghost block" onclick="copyKnowledge()">Скопировать</button></div>`;r.classList.add('show');const next=document.getElementById('nextBtn');if(next){next.style.display='block';next.style.position='relative';next.style.bottom='auto';next.style.zIndex='1';next.textContent='Продолжить →'}setTimeout(()=>r.scrollIntoView({behavior:'smooth',block:'center'}),120);renderLearningDashboard();
+}
+function returnToLearning(id){learningInit();const r=learningRec(id);r.status='new';r.nextReview=0;r.reviewStage=0;r.wrongAt=0;saveLearningPersistent();renderHistory();renderLearningDashboard();toast('Вопрос возвращён в обучение')}
+function retryHistoryQuestion(id){openQuestion(id);hideSheet?.()}
+function learningStats(scope='all'){
+ const arr=scopeQuestions(scope),now=Date.now();let mastered=0,review=0,fresh=0,due=0;
+ arr.forEach(q=>{const r=learningRec(q.id);if(r.status==='mastered')mastered++;else if(r.status==='review'){review++;if(Number(r.nextReview||0)<=now)due++}else fresh++});
+ return {total:arr.length,mastered,review,fresh,due,pct:arr.length?Math.round(mastered/arr.length*100):0};
+}
+function renderLearningDashboard(){
+ learningInit();updateLearningButtons();const host=document.getElementById('learningDashboard');if(!host)return;const s=learningStats('all');
+ const modes=['practical','thinking','erudition','vocabulary','person_type'];
+ host.innerHTML=`<div class="card learning-dashboard"><div class="row"><div><b>Прогресс обучения</b><div class="mini">Сохраняется на этом устройстве</div></div><b>${s.pct}%</b></div><div class="learning-progress"><i style="width:${s.pct}%"></i></div><div class="learning-grid"><div class="learning-stat"><b>${s.mastered}</b><span>изучено</span></div><div class="learning-stat"><b>${s.review}</b><span>на повторении</span></div><div class="learning-stat"><b>${s.fresh}</b><span>ещё не встречались</span></div><div class="learning-stat"><b>${s.due}</b><span>повторить сейчас</span></div></div><button class="btn primary block" style="margin-top:12px" onclick="startFullLearning('all')">Изучить всю базу</button></div>`+
+ modes.map(m=>{const x=learningStats(m);return `<div class="knowledge"><div class="learning-row"><b>${escapeHtml(learningLabel(m))}</b><span>${x.mastered}/${x.total}</span></div><div class="learning-progress"><i style="width:${x.pct}%"></i></div><small>${x.review} на повторении · ${x.fresh} новых</small><button class="learn-btn ${x.mastered||x.review||x.fresh<x.total?'is-progress':''}" onclick="startFullLearning('${m}')">${x.mastered||x.review||x.fresh<x.total?'Продолжить':'Начать'}</button></div>`}).join('')+
+ renderSessionSummary();
+}
+function toggleSessionDetails(id){const el=document.getElementById('session_'+id);if(el)el.hidden=!el.hidden}
+function renderSessionSummary(){learningInit();const rows=state.learning.sessions.slice(0,10);if(!rows.length)return '<div class="knowledge"><b>История занятий</b><small>После первых 10 ответов здесь появится результат занятия.</small></div>';return '<div class="section"><h3>История занятий</h3></div>'+rows.map(s=>{const p=s.answered?Math.round(s.correct/s.answered*100):0;const d=new Date(s.ended||s.started);const items=Array.isArray(s.items)?s.items:[];return `<div class="knowledge"><small>${d.toLocaleDateString('ru-RU')} · ${d.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})}</small><b>${escapeHtml(learningLabel(s.scope))}: ${s.correct}/${s.answered} правильно · ${p}%</b><span class="mini">Ошибок: ${s.wrong}</span>${items.length?`<button class="btn ghost block" style="margin-top:8px" onclick="toggleSessionDetails('${s.id}')">Посмотреть ответы</button><div id="session_${s.id}" hidden>${items.map(h=>`<div class="knowledge" style="margin-top:8px"><small>${h.ok?'✓ Верно':'✕ Ошибка'}</small><b>${escapeHtml(h.q)}</b><span class="mini">Ответ: ${escapeHtml(h.chosen||'—')} · Правильно: ${escapeHtml(h.correctAnswer||'—')}</span><div class="history-actions"><button class="btn ghost" onclick="retryHistoryQuestion('${h.id}')">Переспросить</button><button class="btn ghost" onclick="returnToLearning('${h.id}')">Вернуть в обучение</button></div></div>`).join('')}</div>`:''}</div>`}).join('')}
+function renderHistory(){const box=document.getElementById('historyList');if(!box)return;box.innerHTML=state.history.length?state.history.slice(0,60).map(h=>`<div class="knowledge"><small style="color:${catColor(h.cat||'')}">${h.d||''} ${h.t||''} · ${escapeHtml(h.cat||'')} · ${h.ok?'верно':'ошибка'}</small><b>${escapeHtml(h.q)}</b><span class="mini">Ответ: ${escapeHtml(h.chosen||'—')} · Правильно: ${escapeHtml(h.correctAnswer||'—')}</span><div class="history-actions"><button class="btn ghost" onclick="retryHistoryQuestion('${h.id}')">Переспросить</button><button class="btn ghost" onclick="returnToLearning('${h.id}')">Вернуть в обучение</button></div></div>`).join(''):'<div class="history-empty"><b>История начнётся с первого ответа</b><span>Здесь сохраняются ответы, ошибки и возможность вернуть любой вопрос в обучение.</span></div>'}
+const __oldRenderProgress=renderProgress;
+renderProgress=function(){__oldRenderProgress();renderLearningDashboard();};
+function installLearningButtons(){document.querySelectorAll('.track[onclick*="setMode"]').forEach(el=>{if(el.querySelector('.learn-btn'))return;const m=(el.getAttribute('onclick').match(/setMode\('([^']+)'\)/)||[])[1];if(!m)return;const x=learningStats(m),b=document.createElement('button');b.className='learn-btn'+((x.mastered||x.review||x.fresh<x.total)?' is-progress':'');b.textContent=(x.mastered||x.review||x.fresh<x.total)?'Продолжить':'Начать';b.onclick=e=>{e.stopPropagation();startFullLearning(m)};el.appendChild(b)});updateLearningButtons();}
+setTimeout(()=>{learningInit();installLearningButtons();renderLearningDashboard()},120);
+
+learningInit();hydrate();loadLearningPersistent();loadQuestionsFixed();
 </script>
 </body></html>

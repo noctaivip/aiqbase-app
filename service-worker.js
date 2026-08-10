@@ -1,4 +1,4 @@
-const CACHE_NAME = 'aiqbase-knowledge-1423-v9-sheet-close';
+const CACHE_NAME = 'aiqbase-learning-path-v11-audit-ui2';
 const APP_SHELL = [
   './',
   './index.html',
