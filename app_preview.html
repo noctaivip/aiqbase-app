@@ -2029,7 +2029,7 @@ input,textarea,select{
 .memory-chip span{display:block;color:#A9B6D3;font-size:11px;margin-top:4px;line-height:1.25}
 .memory-signal{margin-top:10px;padding:12px 14px;border-radius:18px;background:rgba(61,214,255,.055);border:1px solid rgba(61,214,255,.16);color:#CFEFFF;font-size:13px;line-height:1.42}
 
-/* === Step 11: AI Roadmap & Long-Term Value === */
+/* === Step 11: Learning Roadmap & Long-Term Value === */
 .roadmap-card{margin-top:12px;padding:16px;border-radius:26px;background:linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.024));border:1px solid rgba(255,255,255,.115);box-shadow:0 18px 46px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.10)}
 .roadmap-card h3{margin:0 0 6px;font-size:17px;letter-spacing:-.03em;color:#F6F8FF}
 .roadmap-card p{margin:0;color:#A9B6D3;font-size:13px;line-height:1.45}
@@ -2041,7 +2041,7 @@ input,textarea,select{
 .value-signal{margin-top:12px;padding:12px 13px;border-radius:18px;background:rgba(62,233,138,.055);border:1px solid rgba(62,233,138,.15);color:#D9FFE9;font-size:12px;line-height:1.4}
 
 
-/* Step 14 fix: AI Brain Profile / Digital Twin stay inside AI screen */
+/* Step 14 fix: Learning Profile / Digital Twin stay inside AI screen */
 .brain-profile-card,.ai-digital-twin-card{margin-top:12px}
 .brain-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
 .brain-grid div,.digital-twin-grid div{padding:10px;border-radius:16px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08)}
@@ -2162,39 +2162,25 @@ input,textarea,select{
    <div id="learningHubModes"></div>
   </section>
   <section id="coach" class="view">
-   <div class="top"><div><div class="kicker">Персональный помощник</div><h1 style="margin:4px 0 0;font-size:25px;letter-spacing:-.05em">Рекомендации</h1></div><span class="pill">Coach</span></div>
+   <div class="top"><div><div class="kicker">Персональный помощник</div><h1 style="margin:4px 0 0;font-size:25px;letter-spacing:-.05em">Рекомендации</h1></div><span class="pill">Learning Coach</span></div>
    <div class="focus-grid"><div class="focus-card"><b id="coachAccuracy">0%</b><span>точность</span></div><div class="focus-card"><b id="coachAnswered">0</b><span>ответов</span></div></div>
    <div class="coach-card recommendation-card" style="margin-top:12px"><span class="challenge-chip">Следующий лучший шаг</span><h3 id="coachRecommendationTitle">Сначала соберём данные</h3><p id="coachFocus">Пройдите короткое занятие — после этого рекомендации будут опираться на ваши реальные ответы.</p><button class="btn primary block" onclick="applyCoachRecommendation()">Применить рекомендацию</button></div>
    <div class="coach-card"><h3>Что требует внимания</h3><p id="weakTopics">Пока недостаточно данных для уверенного вывода.</p><div class="coach-evidence" id="coachEvidence"><span>Ошибки</span><b>0</b><span>К повторению</span><b>0</b></div></div>
    <div class="coach-card"><h3>Краткий анализ</h3><p id="coachReport">После первых ответов здесь появится краткий вывод по точности, слабым областям и удержанию знаний.</p></div>
    <div class="coach-card ai-memory-card"><h3>Learning Memory</h3><p id="memorySummary">Система начнёт формировать карту сильных и слабых тем после первых ответов.</p><div class="memory-grid" id="memorySkills"><div class="memory-chip"><b>—</b><span>практика</span></div><div class="memory-chip"><b>—</b><span>мышление</span></div><div class="memory-chip"><b>—</b><span>эрудиция</span></div></div><div class="memory-signal" id="nextSmartStep">Следующий шаг появится после раунда.</div></div>
-   
-   <div class="roadmap-card">
-    <div class="roadmap-stage" id="roadmapStage">AI Roadmap · старт</div>
-    <h3>90-дневный маршрут развития</h3>
-    <p id="roadmapCopy">AI превращает ответы в долгосрочную программу: диагностика, укрепление слабых тем и персональный рост.</p>
-    <div class="roadmap-steps" id="roadmapSteps">
-     <div class="roadmap-step"><div class="roadmap-day">1</div><div><b>Диагностика</b><span>AI изучает стиль мышления и частые ошибки.</span></div><i>сейчас</i></div>
-     <div class="roadmap-step"><div class="roadmap-day">30</div><div><b>Укрепление</b><span>Персональные тренировки по слабым направлениям.</span></div><i>далее</i></div>
-     <div class="roadmap-step"><div class="roadmap-day">90</div><div><b>Рост</b><span>Отчёты, навыки и новая сложность под пользователя.</span></div><i>цель</i></div>
+   <div class="coach-card evidence-coach-card">
+    <span class="challenge-chip">На основе ваших ответов</span>
+    <h3>Почему система рекомендует этот шаг</h3>
+    <p class="muted">Learning Coach использует только измеримые данные этого профиля: ошибки, точность, назначенные повторения и историю обучения. Он не выдаёт вымышленные оценки способностей.</p>
+    <div class="coach-evidence-grid">
+     <div class="institution-metric"><b id="coachEvidenceAccuracy">0%</b><span>точность ответов</span></div>
+     <div class="institution-metric"><b id="coachEvidenceDue">0</b><span>пора повторить</span></div>
+     <div class="institution-metric"><b id="coachEvidenceWeak">—</b><span>приоритетная тема</span></div>
+     <div class="institution-metric"><b id="coachEvidenceCoverage">0%</b><span>охват базы</span></div>
     </div>
-    <div class="value-signal" id="roadmapValue">Pro открывает полный маршрут, безлимитные AI-тренировки и глубокие отчёты.</div>
+    <p class="mini" style="margin-top:10px">Рекомендация меняется только после новых учебных данных.</p>
    </div>
-
-   <div id="ai-digital-twin" class="coach-card ai-digital-twin-card">
-    <h3>🧬 Learning Profile</h3>
-    <p><strong>AI наблюдает, как меняется ваш стиль мышления.</strong></p>
-    <div class="digital-twin-grid">
-     <div><b>+4%</b><span>аналитика</span></div>
-     <div><b>+2%</b><span>скорость</span></div>
-     <div><b>стабильно</b><span>фокус</span></div>
-    </div>
-    <div class="memory-signal">Следующая цель: улучшить критическое мышление.</div>
-   </div>
-
-   <div class="generator-box"><h3>Бесконечные тренировки</h3><p>Когда локальной базы становится мало, Персональная тренировка подбирает задания по слабым темам пользователя и сохраняет их в личной базе.</p><button class="btn primary block" onclick="generatePersonalTraining()">Создать AI-тренировку</button></div>
-   <div class="ai-quality-card"><h3>Content Quality Engine</h3><p id="qualityGateReport">Новые задания проходят проверку уникальности, структуры, объяснения и практической пользы перед добавлением в личную базу.</p><div class="quality-steps"><div class="quality-step"><b>Уникальность</b><span>активно</span></div><div class="quality-step"><b>Польза в жизни</b><span>активно</span></div><div class="quality-step"><b>Объяснение + факт</b><span>активно</span></div></div><div class="ai-growth-row"><div class="mini-metric"><b id="personalBaseMetric">0</b><span>личная база</span></div><div class="mini-metric"><b id="rejectedMetric">0</b><span>отброшено</span></div></div></div>
-    <div class="coach-card"><h3>Следующее действие</h3><p id="coachTip">Ответьте на 5 вопросов: приложение сохранит ошибки и подберёт следующий раунд точнее.</p></div>
+   <div class="coach-card"><h3>Следующее действие</h3><p id="coachTip">Ответьте на 5 вопросов: приложение сохранит ошибки и подберёт следующий раунд точнее.</p></div>
    <button class="btn primary block" onclick="startSession()">Начать персональный раунд</button>
    <button class="btn ghost block" style="margin-top:10px" onclick="reviewMistakes()">Повторить ошибки</button>
   </section>
@@ -2412,7 +2398,7 @@ function escapeAttr(s){return String(s||'').replace(/[\'\\]/g,c=>c==='\\'?'\\\\'
 function escapeHtml(s){return String(s||'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
 
 
-/* === Investor Step 6 overrides: AI Coach, infinite content, monetization === */
+/* === Investor Step 6 overrides: Learning Coach, infinite content, monetization === */
 function nowMs(){return Date.now()}
 function isPro(){return state.plan==='pro'||state.plan==='elite'||state.plan==='premium'||(Number(state.trialUntil||0)>nowMs())}
 function planName(){if(state.plan==='elite'||state.plan==='premium')return 'Pro Elite'; if(state.plan==='pro'||Number(state.trialUntil||0)>nowMs())return 'Pro'; return 'Free'}
@@ -2513,17 +2499,17 @@ function generatePersonalTraining(){
   state.personalQuestions=[...gate.passed,...(state.personalQuestions||[])].slice(0,250);
   questions=normalizeQuestions([...gate.passed,...questions]);
   save();renderLibrary();updateStats();renderCoach();
-  toast(gate.passed.length?`AI добавил ${gate.passed.length} проверенных вопросов`:'AI не добавил повторы');
+  toast(gate.passed.length?`Добавлено ${gate.passed.length} проверенных вопросов`:'Повторы не добавлены');
 }
 
 function roadmapStageData(){
   const answered=Number(state.answered)||0;
   const acc=answered?Math.round((state.correct||0)/answered*100):0;
   const weak=Object.entries(state.mistakes||{}).sort((a,b)=>b[1]-a[1]).map(x=>x[0]);
-  if(answered<5){return {stage:'AI Roadmap · диагностика',copy:'Пройдите первый короткий раунд — AI определит стартовый профиль мышления и предложит персональную программу.',value:'Free показывает стартовый маршрут. Pro откроет полный 90-дневный план и безлимитные AI-тренировки.'}}
-  if(answered<30){return {stage:'AI Roadmap · неделя 1',copy:`AI уже видит ваш уровень: точность ${acc}%. Следующий фокус: ${weak[0]||'практические знания'}.`,value:'Подписка становится понятной: пользователь платит за персональный маршрут, а не просто за вопросы.'}}
-  if(answered<90){return {stage:'AI Roadmap · месяц 1',copy:`Собрано достаточно данных для адаптивных тренировок. AI усиливает слабые темы и постепенно повышает сложность.`,value:'Рост удержания: чем больше ответов, тем ценнее персональная память AI.'}}
-  return {stage:'AI Roadmap · продвинутый рост',copy:`AI ведёт долгосрочный профиль: точность ${acc}%, слабые темы учтены, маршрут постоянно обновляется.`,value:'Это уже модель долгосрочной подписки: прогресс, отчёты, AI-память и персональный контент.'}
+  if(answered<5){return {stage:'Learning Roadmap · диагностика',copy:'Пройдите первый короткий раунд — система определит стартовый профиль мышления и предложит персональную программу.',value:'Free показывает стартовый маршрут. Pro откроет полный 90-дневный план и расширенные персональные тренировки.'}}
+  if(answered<30){return {stage:'Learning Roadmap · неделя 1',copy:`система уже видит ваш уровень: точность ${acc}%. Следующий фокус: ${weak[0]||'практические знания'}.`,value:'Подписка становится понятной: пользователь платит за персональный маршрут, а не просто за вопросы.'}}
+  if(answered<90){return {stage:'Learning Roadmap · месяц 1',copy:`Собрано достаточно данных для адаптивных тренировок. система усиливает слабые темы и постепенно повышает сложность.`,value:'Рост удержания: чем больше ответов, тем ценнее персональная память AI.'}}
+  return {stage:'Learning Roadmap · продвинутый рост',copy:`система ведёт долгосрочный профиль: точность ${acc}%, слабые темы учтены, маршрут постоянно обновляется.`,value:'Это уже модель долгосрочной подписки: прогресс, отчёты, история обучения и персональный контент.'}
 }
 function renderRoadmap(){
   const d=roadmapStageData();
@@ -2534,7 +2520,7 @@ function renderRoadmap(){
 
 function trainWeakTopics(){const weak=Object.entries(state.mistakes||{}).sort((a,b)=>b[1]-a[1])[0]?.[0];if(!weak){selectedMode='practical';toast('Начинаем с практических тем');startSession();return}ensureQuestionsLoaded().then(()=>{const arr=questions.filter(q=>q.category===weak);if(!arr.length){toast('Слабая тема пока не найдена в базе');startSession();return}current=shuffleQuestion(arr[Math.floor(Math.random()*arr.length)]);renderQuestion();showView('train');toast('Тренировка слабой темы: '+weak)})}
 function openWeakTopics(){const weak=Object.entries(state.mistakes||{}).sort((a,b)=>b[1]-a[1]).slice(0,5);if(!weak.length){toast('Слабые темы появятся после первых ошибок');return}document.getElementById('sheet').innerHTML=`<button class="close" onclick="hideSheet()">×</button><h2>Слабые темы</h2><p class="sheet-subtitle">Темы, где сейчас больше всего ошибок.</p>${weak.map(([name,count])=>`<button class="filter-choice" onclick="hideSheet();trainWeakTopics()"><div>${escapeHtml(name)}<span>${count} ошибок</span></div><em>›</em></button>`).join('')}<button class="btn primary block" style="margin-top:12px" onclick="hideSheet();trainWeakTopics()">Тренировать слабые темы</button>`;showSheet()}
-function renderCoach(){const weak=Object.entries(state.mistakes||{}).sort((a,b)=>b[1]-a[1]).slice(0,3);setText('weakTopics',weak.length?weak.map(x=>x[0]).join(', '):'Стартовый фокус: безопасность, деньги и интернет.');setText('coachFocus',weak.length?`Сегодня система усиливает: ${weak[0][0]}.`:'Рекомендуемый старт: практические темы — безопасность, деньги и интернет.');setText('coachReport',aiRoundReport());setText('generatedMetric',state.generated||0);setText('personalBaseMetric',(state.personalQuestions||[]).length);setText('rejectedMetric',state.rejectedGenerated||0);setText('qualityMetric',(state.generated||0)>0?'92+':'—');setText('qualityGateReport',(state.generated||0)>0?`Система подготовила ${state.generated} персональных заданий, ${state.rejectedGenerated||0} отброшено как повторы или слабые. В личную базу попадают только вопросы с объяснением, фактом и практической пользой.`:'Новые задания проходят проверку уникальности, структуры, объяснения и практической пользы перед добавлением в личную базу.');setText('coachTip',isPro()?'Pro активен: доступен расширенный дневной объём и аналитика обучения.':(state.today>=state.goal?'Дневной лимит Free выполнен. Pro увеличивает дневной объём обучения.':'Пройдите короткий раунд: система обновит отчёт и маршрут.'));setText('homePlan',weak.length?`Сегодня: ${state.goal} вопросов · фокус ${weak[0][0]}`:`${state.goal} вопросов · персональный подбор`);renderRoadmap();renderCoachRecommendation()}
+function renderCoach(){const __cm=academicMetrics();const __ls=learningStats('all');const __weak=Object.entries(state.mistakes||{}).sort((a,b)=>b[1]-a[1])[0];setText('coachEvidenceAccuracy',__cm.accuracy+'%');setText('coachEvidenceDue',__ls.due);setText('coachEvidenceWeak',__weak?__weak[0]:'—');setText('coachEvidenceCoverage',__cm.coverage+'%');const weak=Object.entries(state.mistakes||{}).sort((a,b)=>b[1]-a[1]).slice(0,3);setText('weakTopics',weak.length?weak.map(x=>x[0]).join(', '):'Стартовый фокус: безопасность, деньги и интернет.');setText('coachFocus',weak.length?`Сегодня система усиливает: ${weak[0][0]}.`:'Рекомендуемый старт: практические темы — безопасность, деньги и интернет.');setText('coachReport',aiRoundReport());setText('generatedMetric',state.generated||0);setText('personalBaseMetric',(state.personalQuestions||[]).length);setText('rejectedMetric',state.rejectedGenerated||0);setText('qualityMetric',(state.generated||0)>0?'92+':'—');setText('qualityGateReport',(state.generated||0)>0?`Система подготовила ${state.generated} персональных заданий, ${state.rejectedGenerated||0} отброшено как повторы или слабые. В личную базу попадают только вопросы с объяснением, фактом и практической пользой.`:'Новые задания проходят проверку уникальности, структуры, объяснения и практической пользы перед добавлением в личную базу.');setText('coachTip',isPro()?'Pro активен: доступен расширенный дневной объём и аналитика обучения.':(state.today>=state.goal?'Дневной лимит Free выполнен. Pro увеличивает дневной объём обучения.':'Пройдите короткий раунд: система обновит отчёт и маршрут.'));setText('homePlan',weak.length?`Сегодня: ${state.goal} вопросов · фокус ${weak[0][0]}`:`${state.goal} вопросов · персональный подбор`);renderRoadmap();renderCoachRecommendation()}
 
 function renderGrowthLoop(){
   const answered=Number(state.answered)||0;
@@ -2711,7 +2697,7 @@ function answer(i){
  state.answered++;state.goal=planDailyLimit();state.today=Math.min(state.goal,state.today+1);state.daily[todayKey()]=(state.daily[todayKey()]||0)+1;if(ok){state.correct++;state.xp+=12}else{state.xp+=4;state.mistakes[current.category]=(state.mistakes[current.category]||0)+1}state.level=Math.max(1,Math.floor(state.xp/100)+1);
  scheduleLearning(current,ok);
  const histItem={id:current.id,q:current.question,ok,cat:current.category,mode:current.mode,chosen:current.options[i],correctAnswer:current.options[current.answer],t:new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}),d:todayKey(),ts:Date.now()};state.history.unshift(histItem);state.history=state.history.slice(0,500);if(learningMode&&state.learning.active){state.learning.active.items=Array.isArray(state.learning.active.items)?state.learning.active.items:[];state.learning.active.items.push({...histItem})}state.mastery[current.id]=(state.mastery[current.id]||0)+(ok?2:1);finishLearningSessionIfNeeded();saveLearningPersistent();updateStats();
- if(navigator.vibrate)navigator.vibrate(ok?25:[18,25,18]);const r=document.getElementById('result');r.innerHTML=`<h3>${ok?'Верно':'Правильный ответ: '+escapeHtml(current.options[current.answer])}</h3><p><b>Объяснение:</b> ${escapeHtml(current.explanation||'')}</p><p><b>Факт:</b> ${escapeHtml(current.fact||'')}</p><p><b>Где пригодится:</b> ${escapeHtml(current.whereUseful||'В повседневных решениях.')}</p><div class="ai-coach-result"><h4>🤖 AI Coach</h4><p><b>Навык:</b> ${escapeHtml(aiSkill(current))}</p><p><b>Вывод:</b> ${escapeHtml(aiTakeaway(current))}</p><p><b>Дальше:</b> ${escapeHtml(ok?'Правильный ответ сохранён в прогрессе.': 'Этот вопрос вернётся на повторение.')}</p></div><div class="cta result-actions" style="margin-top:12px"><button class="btn ghost block" onclick="toggleFav('${current.id}')">${state.favorites.includes(current.id)?'Убрать из избранного':'В избранное'}</button><button class="btn ghost block" onclick="copyKnowledge()">Скопировать</button></div>`;r.classList.add('show');window.__continuePending=true;const next=document.getElementById('nextBtn');if(next){next.style.display='block';next.textContent='Продолжить →'}document.querySelector('.screen')?.classList.add('continue-visible');setTimeout(()=>r.scrollIntoView({behavior:'smooth',block:'center'}),120);renderLearningDashboard();
+ if(navigator.vibrate)navigator.vibrate(ok?25:[18,25,18]);const r=document.getElementById('result');r.innerHTML=`<h3>${ok?'Верно':'Правильный ответ: '+escapeHtml(current.options[current.answer])}</h3><p><b>Объяснение:</b> ${escapeHtml(current.explanation||'')}</p><p><b>Факт:</b> ${escapeHtml(current.fact||'')}</p><p><b>Где пригодится:</b> ${escapeHtml(current.whereUseful||'В повседневных решениях.')}</p><div class="ai-coach-result"><h4>🎓 Learning Coach</h4><p><b>Навык:</b> ${escapeHtml(aiSkill(current))}</p><p><b>Вывод:</b> ${escapeHtml(aiTakeaway(current))}</p><p><b>Дальше:</b> ${escapeHtml(ok?'Правильный ответ сохранён в прогрессе.': 'Этот вопрос вернётся на повторение.')}</p></div><div class="cta result-actions" style="margin-top:12px"><button class="btn ghost block" onclick="toggleFav('${current.id}')">${state.favorites.includes(current.id)?'Убрать из избранного':'В избранное'}</button><button class="btn ghost block" onclick="copyKnowledge()">Скопировать</button></div>`;r.classList.add('show');window.__continuePending=true;const next=document.getElementById('nextBtn');if(next){next.style.display='block';next.textContent='Продолжить →'}document.querySelector('.screen')?.classList.add('continue-visible');setTimeout(()=>r.scrollIntoView({behavior:'smooth',block:'center'}),120);renderLearningDashboard();
 }
 function returnToLearning(id){learningInit();const r=learningRec(id);r.status='new';r.nextReview=0;r.reviewStage=0;r.lapses=0;r.firstSeen=0;r.lastCorrect=0;saveLearningPersistent();renderHistory();renderLearningDashboard();toast('Вопрос возвращён в обучение')}
 function retryHistoryQuestion(id){openQuestion(id);hideSheet?.()}
