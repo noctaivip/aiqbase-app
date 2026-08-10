@@ -1,4 +1,4 @@
-const CACHE_NAME = 'aiqbase-learning-path-v11-audit-ui2';
+const CACHE_NAME = 'aiqbase-runtime4-core-stable';
 const APP_SHELL = [
   './',
   './index.html',

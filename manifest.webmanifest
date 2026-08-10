@@ -1,6 +1,6 @@
 {
-  "name": "IQ Factory AI",
-  "short_name": "IQ Factory",
+  "name": "AIQBase",
+  "short_name": "AIQBase",
   "description": "Персональный тренер мышления и полезных знаний для реальной жизни.",
   "start_url": "./index.html",
   "scope": "./",
