@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "product": "AIQBase",
+  "status": "backend-ready-contract",
+  "activeClientRole": "student-local",
+  "roles": {
+    "student": {
+      "permissions": [
+        "learn",
+        "review",
+        "view_own_progress",
+        "export_own_data",
+        "delete_own_local_data"
+      ]
+    },
+    "instructor": {
+      "requiresBackend": true,
+      "permissions": [
+        "view_assigned_cohorts",
+        "assign_learning_scope",
+        "view_student_academic_metrics",
+        "export_cohort_reports"
+      ]
+    },
+    "institution": {
+      "requiresBackend": true,
+      "permissions": [
+        "manage_instructors",
+        "manage_cohorts",
+        "view_aggregate_metrics",
+        "configure_retention_policy",
+        "audit_access"
+      ]
+    }
+  },
+  "principles": [
+    "least_privilege",
+    "student_data_portability",
+    "explicit_role_boundaries",
+    "no_claim_of_server_sync_until_connected"
+  ]
+}

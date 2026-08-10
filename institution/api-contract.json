@@ -1,0 +1,34 @@
+{
+  "contractVersion": "0.1",
+  "basePath": "/api/v1",
+  "authentication": "OIDC/OAuth2-compatible backend required before activation",
+  "resources": {
+    "me": [
+      "GET /me"
+    ],
+    "learningEvents": [
+      "POST /learning-events",
+      "GET /students/{studentId}/learning-events"
+    ],
+    "progress": [
+      "GET /students/{studentId}/progress"
+    ],
+    "cohorts": [
+      "GET /cohorts",
+      "POST /cohorts/{cohortId}/assignments"
+    ],
+    "institutionAnalytics": [
+      "GET /institutions/{institutionId}/analytics"
+    ]
+  },
+  "minimumServerRequirements": [
+    "TLS",
+    "role-based access control",
+    "audit logging",
+    "encrypted persistence",
+    "data deletion workflow",
+    "backup and recovery",
+    "rate limiting"
+  ],
+  "note": "This is an implementation contract only. Current client remains local-first until a real backend is connected."
+}
