@@ -2058,18 +2058,29 @@ input,textarea,select{
 .digital-twin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
 .digital-twin-grid span{display:block;margin-top:3px;color:#A9B6D3;font-size:11px}
 
-/* Single professional continue button */
-#nextBtn{
-  position:relative !important; left:auto !important; right:auto !important; bottom:auto !important;
-  width:100% !important; min-height:58px; margin:18px 0 2px !important;
-  border:1px solid rgba(119,226,255,.78) !important; border-radius:18px !important;
+/* Single professional continue button — always visible after an answer */
+#nextBtn.global-next-btn{
+  position:absolute !important;
+  left:28px !important;
+  right:28px !important;
+  bottom:96px !important;
+  width:auto !important;
+  min-height:58px !important;
+  margin:0 !important;
+  border:1px solid rgba(119,226,255,.78) !important;
+  border-radius:18px !important;
   background:linear-gradient(110deg,#20c8ee 0%,#3a9cff 48%,#7a55f5 100%) !important;
-  box-shadow:0 10px 28px rgba(52,139,255,.28),inset 0 1px 0 rgba(255,255,255,.38) !important;
-  color:#fff !important; font-weight:900 !important; font-size:17px !important; letter-spacing:.15px;
-  z-index:1 !important; transform:none;
+  box-shadow:0 14px 34px rgba(52,139,255,.34),inset 0 1px 0 rgba(255,255,255,.38) !important;
+  color:#fff !important;
+  font-weight:900 !important;
+  font-size:17px !important;
+  letter-spacing:.15px;
+  z-index:120 !important;
+  transform:none;
 }
-#nextBtn:active{transform:translateY(1px) scale(.995) !important;}
+#nextBtn.global-next-btn:active{transform:translateY(1px) scale(.995) !important;}
 #stickyNextBtn,.next-inline{display:none !important;}
+@media(max-width:520px){#nextBtn.global-next-btn{left:24px !important;right:24px !important;bottom:94px !important;}}
 
 /* === Institution foundation v1 === */
 .institution-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}.institution-metric{padding:13px;border-radius:16px;background:rgba(10,25,45,.58);border:1px solid rgba(145,171,214,.24)}.institution-metric b{display:block;font-size:20px;color:#fff}.institution-metric span{display:block;margin-top:3px;font-size:11px;color:#9fb0cc}.level-card{margin-top:12px;padding:15px;border-radius:20px;background:linear-gradient(135deg,rgba(61,214,255,.08),rgba(122,85,255,.08));border:1px solid rgba(61,214,255,.22)}.level-card h3{margin:4px 0 5px}.level-track{height:9px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:10px}.level-track i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#3DD6FF,#7A55FF)}.plan-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.plan-box{padding:11px 8px;border-radius:15px;border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.035);text-align:center}.plan-box b{display:block;font-size:13px}.plan-box span{display:block;font-size:10px;color:#a9b6d3;margin-top:3px;line-height:1.3}.plan-box.active{border-color:rgba(61,214,255,.55);background:rgba(61,214,255,.08)}@media(max-width:380px){.plan-grid{grid-template-columns:1fr}.institution-grid{grid-template-columns:1fr 1fr}}
@@ -2126,7 +2137,7 @@ input,textarea,select{
   <section id="train" class="view">
    <div class="top"><div><div class="kicker">Тренировка</div><h1 style="margin:4px 0 0;font-size:25px;letter-spacing:-.05em">Раунд знаний</h1></div><span class="pill" id="modeName">Смешанный</span></div><div id="learningModeStrip" class="learning-mode-strip"><i class="dot"></i><div><b id="learningModeTitle">Режим обучения</b><span id="learningModeMeta">Прогресс сохраняется на этом устройстве</span></div></div>
    <div class="card" style="margin-bottom:12px"><div class="row"><span class="mini" id="roundInfo">0 из 5</span><span class="mini" id="dailyStatus">цель дня</span></div><div class="progressbar" style="margin-top:10px"><i id="roundBar"></i></div></div>
-   <div id="goalComplete" class="completion"><h3>Цель дня выполнена</h3><p class="muted">Вы получили сегодняшнюю порцию полезных знаний. Можно продолжить или вернуться завтра.</p><button class="btn gold block" onclick="shareProgress()">Поделиться итогом</button></div><div class="question-card"><div class="meta"><span class="tag green" id="qTag">Полезное знание</span><span class="tag blue" id="qCat">Категория</span></div><h2 class="qtext" id="qText">Загрузка вопроса...</h2><div id="options"></div><div id="result" class="result"></div><button id="nextBtn" class="btn primary block" style="margin-top:14px;display:none" onclick="nextQuestion()">Продолжить →</button></div>
+   <div id="goalComplete" class="completion"><h3>Цель дня выполнена</h3><p class="muted">Вы получили сегодняшнюю порцию полезных знаний. Можно продолжить или вернуться завтра.</p><button class="btn gold block" onclick="shareProgress()">Поделиться итогом</button></div><div class="question-card"><div class="meta"><span class="tag green" id="qTag">Полезное знание</span><span class="tag blue" id="qCat">Категория</span></div><h2 class="qtext" id="qText">Загрузка вопроса...</h2><div id="options"></div><div id="result" class="result"></div></div>
   </section>
   <section id="library" class="view">
    <div class="top"><div><div class="kicker">База знаний</div><h1 style="margin:4px 0 0;font-size:25px;letter-spacing:-.05em">Все вопросы</h1></div><div class="pill" id="qCount">0</div></div>
@@ -2211,6 +2222,7 @@ input,textarea,select{
   </section>
  </main>
 
+ <button id="nextBtn" class="btn primary block global-next-btn" style="display:none" onclick="nextQuestion()" aria-label="Перейти к следующему вопросу">Продолжить →</button>
  <nav class="bottom"><button class="nav active" data-target="home" onclick="showView('home')"><i>⌂</i><span>Сегодня</span></button><button class="nav" data-target="library" onclick="showView('library')"><i>◇</i><span>База</span></button><button class="nav" data-target="coach" onclick="showView('coach')"><i>✦</i><span>AI</span></button><button class="nav" data-target="progress" onclick="showView('progress')"><i>▣</i><span>Рост</span></button><button class="nav" data-target="profile" onclick="showView('profile')"><i>◎</i><span>Профиль</span></button></nav>
  <div id="toast" class="toast"></div><div id="modal" class="modal" onclick="closeModal(event)" role="dialog" aria-modal="true"><div class="sheet" id="sheet"></div></div>
 </div>

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'aiqbase-institution-academic-content-v2';
+const CACHE_NAME = 'aiqbase-continue-button-restored-v1';
 const APP_SHELL = [
   './',
   './index.html',
