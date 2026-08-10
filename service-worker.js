@@ -1,4 +1,4 @@
-const CACHE_NAME='aiqbase-institution-v8-learning-hub';
+const CACHE_NAME='aiqbase-institution-v9';
 const APP_SHELL = [
   './',
   './index.html',
