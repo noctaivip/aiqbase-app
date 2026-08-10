@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "product": "AIQBase",
   "language": "ru",
   "questionCount": 2500,
@@ -13,7 +13,9 @@
     "sourceType",
     "sourceCitation",
     "reviewedBy",
-    "reviewedAt"
+    "reviewedAt",
+    "cognitiveLevel",
+    "academicDifficulty"
   ],
   "verificationPolicy": {
     "pending_review": "Редакционная запись структурирована, но ещё не подтверждена внешним академическим источником/рецензентом.",
@@ -29,5 +31,33 @@
     "erudition": 500,
     "vocabulary": 500,
     "person_type": 500
-  }
+  },
+  "academicMetadata": {
+    "difficulty": [
+      "Foundation",
+      "Developing",
+      "Advanced"
+    ],
+    "cognitiveLevel": [
+      "Recall",
+      "Understanding",
+      "Application",
+      "Analysis"
+    ],
+    "requiredFields": [
+      "learningObjective",
+      "academicDifficulty",
+      "cognitiveLevel",
+      "verificationStatus"
+    ],
+    "verifiedRequires": [
+      "sourceCitation",
+      "reviewedBy",
+      "reviewedAt"
+    ],
+    "note": "Academic metadata supports instructional organization; pending_review does not imply external academic validation."
+  },
+  "contentVersion": "1.2",
+  "academicMetadataVersion": "1.1",
+  "learningObjectivePolicy": "question_specific_answer_neutral"
 }
