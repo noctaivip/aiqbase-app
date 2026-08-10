@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.1",
+  "schemaVersion": "1.3",
   "product": "AIQBase",
   "language": "ru",
   "questionCount": 2500,
@@ -57,7 +57,18 @@
     ],
     "note": "Academic metadata supports instructional organization; pending_review does not imply external academic validation."
   },
-  "contentVersion": "1.2",
-  "academicMetadataVersion": "1.1",
-  "learningObjectivePolicy": "question_specific_answer_neutral"
+  "contentVersion": "1.3",
+  "academicMetadataVersion": "1.3",
+  "learningObjectivePolicy": "question_specific_answer_neutral_v2",
+  "integrityPolicy": {
+    "coachTerminology": "Learning Coach / rule-based personalization until a real model is connected",
+    "noStandardizedIQClaim": true,
+    "verificationRequires": [
+      "sourceCitation",
+      "reviewedBy",
+      "reviewedAt"
+    ],
+    "embeddedFallbackParity": "required_1_to_1",
+    "forbiddenPseudoAIClaims": "strict_qa_scan"
+  }
 }
