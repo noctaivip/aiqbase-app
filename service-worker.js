@@ -1,4 +1,4 @@
-const CACHE_NAME = 'aiqbase-runtime4-core-stable';
+const CACHE_NAME = 'aiqbase-institution-foundation-v1';
 const APP_SHELL = [
   './',
   './index.html',
