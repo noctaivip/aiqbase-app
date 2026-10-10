@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="referrer" content="no-referrer"><title>Новый пароль — AIQ Base</title>
+<style>:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at top,#173c5c 0,#071321 65%);color:#f5f9ff;font-family:system-ui,-apple-system,sans-serif;display:grid;place-items:center;padding:22px}.card{width:min(100%,430px);padding:28px 24px;background:#10253b;border:1px solid #395f82;border-radius:24px;box-shadow:0 20px 55px #0007}.brand{font-weight:800;font-size:25px;letter-spacing:.2px}h1{font-size:25px;margin:26px 0 8px}p{color:#c0d4e5;line-height:1.5}label{display:block;margin-top:16px;font-size:14px;font-weight:650}input{width:100%;display:block;margin-top:7px;padding:14px;border:1px solid #54738e;border-radius:12px;background:#091a2b;color:#fff;font:inherit;outline-offset:3px}button{width:100%;border:0;border-radius:12px;padding:15px;margin-top:20px;background:linear-gradient(100deg,#13b7e9,#7062ef);color:#fff;font:inherit;font-weight:800;cursor:pointer}button:disabled{opacity:.55;cursor:wait}[hidden]{display:none!important}.hint{font-size:13px}.success{color:#79e3ba!important}.error{color:#ffb7b7!important}</style></head>
+<body><main class="card"><div class="brand">AIQ Base</div><h1>Установить новый пароль</h1><p id="status" role="status">Проверяем ссылку восстановления…</p><form id="form" hidden><label for="password">Новый пароль<input id="password" type="password" minlength="8" autocomplete="new-password" required></label><label for="confirm">Повторите новый пароль<input id="confirm" type="password" minlength="8" autocomplete="new-password" required></label><p class="hint">Не менее 8 символов.</p><button id="submit" type="submit">Сохранить новый пароль</button></form><p class="hint">После смены пароля вернитесь в приложение AIQ Base и войдите.</p></main>
+<script type="module">
+import {createClient} from 'https://esm.sh/@supabase/supabase-js@2';
+const supabase=createClient('https://bqiylzuysatmbaehgcoa.supabase.co','sb_publishable_5TrTAz-1fMwQ_dAAQKx6Mg_gvHyZ78w',{auth:{persistSession:false,detectSessionInUrl:false,autoRefreshToken:false}});
+const el=id=>document.getElementById(id),status=el('status'),form=el('form'),password=el('password'),confirm=el('confirm'),submit=el('submit');
+const show=(message,kind='')=>{status.textContent=message;status.className=kind};
+const query=new URLSearchParams(location.search),hash=new URLSearchParams(location.hash.slice(1));
+try{
+  if(query.has('error')||hash.has('error'))throw Error('expired');
+  let response;
+  if(query.has('token_hash'))response=await supabase.auth.verifyOtp({token_hash:query.get('token_hash'),type:'recovery'});
+  else if(query.has('code'))response=await supabase.auth.exchangeCodeForSession(query.get('code'));
+  else if(hash.has('access_token')&&hash.has('refresh_token')&&hash.get('type')==='recovery')response=await supabase.auth.setSession({access_token:hash.get('access_token'),refresh_token:hash.get('refresh_token')});
+  else throw Error('missing');
+  if(response.error)throw response.error;
+  const user=await supabase.auth.getUser();
+  if(user.error||!user.data.user)throw Error('invalid');
+  history.replaceState(null,'',location.pathname);
+  form.hidden=false;show('Ссылка подтверждена. Придумайте новый пароль.','success');
+}catch(_error){show('Ссылка недействительна или срок её действия истёк. Запросите новое письмо в приложении AIQ Base.','error')}
+form.addEventListener('submit',async event=>{
+ event.preventDefault();
+ if(password.value.length<8){show('Пароль должен содержать не менее 8 символов.','error');return}
+ if(password.value!==confirm.value){show('Пароли не совпадают. Попробуйте ещё раз.','error');return}
+ submit.disabled=true;show('Сохраняем новый пароль…');
+ try{const result=await supabase.auth.updateUser({password:password.value});if(result.error)throw result.error;
+ form.hidden=true;show('Пароль успешно изменён! Откройте AIQ Base и войдите с новым паролем.','success');await supabase.auth.signOut();
+ }catch(_error){show('Не удалось сохранить пароль. Повторите попытку или запросите новое письмо.','error');submit.disabled=false}
+});
+</script></body></html>
